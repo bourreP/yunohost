@@ -45,7 +45,7 @@ logger = getActionLogger('yunohost.firewall')
 
 
 def firewall_allow(protocol, port, ipv4_only=False, ipv6_only=False,
-                   no_upnp=False, no_reload=False):
+                   no_upnp=False, no_reload=False, description=""):
     """
     Allow connections on a port
 
@@ -56,6 +56,7 @@ def firewall_allow(protocol, port, ipv4_only=False, ipv6_only=False,
         ipv6_only -- Only add a rule for IPv6 connections
         no_upnp -- Do not add forwarding of this port with UPnP
         no_reload -- Do not reload firewall rules
+        description -- Use of this port
 
     """
     firewall = firewall_list(raw=True)
@@ -87,6 +88,9 @@ def firewall_allow(protocol, port, ipv4_only=False, ipv6_only=False,
         # Add port forwarding with UPnP
         if not no_upnp and port not in firewall['uPnP'][p]:
             firewall['uPnP'][p].append(port)
+        if not description.strip() and port not in firewall['description'][p]:
+            firewall['description'][p].append(port)
+            firewall['description'][p][port] = description
 
     # Update and reload firewall
     _update_firewall_file(firewall)
