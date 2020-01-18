@@ -38,6 +38,9 @@ def clean():
     if _is_installed("legacy_app"):
         app_remove("legacy_app")
 
+    if _is_installed("legacy_app__2"):
+        app_remove("legacy_app__2")
+
     if _is_installed("full_domain_app"):
         app_remove("full_domain_app")
 
