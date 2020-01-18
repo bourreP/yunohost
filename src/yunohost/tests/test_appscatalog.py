@@ -31,8 +31,8 @@ DUMMY_APP_CATALOG = """{
        "bar": {"id": "bar", "level": 7, "category": "swag", "manifest":{"description": "Bar"}}
    },
    "categories": [
-       {"id": "yolo", "description": "YoLo"},
-       {"id": "swag", "description": "sWaG"}
+       {"id": "yolo", "title": { "en": "yolo", "fr": "i-olo"}, "description": "YoLo"},
+       {"id": "swag", "title": { "en": "swag", "fr": "souag"}, "description": "sWaG"}
    ]
 }
 """
