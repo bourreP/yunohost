@@ -602,6 +602,7 @@
     "user_update_failed": "Could not update user {user}: {error}",
     "user_updated": "User info changed",
     "users_available": "Available users:",
+    "user_reserved": "The user '{user}' is reserved by the system",
     "yunohost_already_installed": "YunoHost is already installed",
     "yunohost_ca_creation_failed": "Could not create certificate authority",
     "yunohost_ca_creation_success": "Local certification authority created.",

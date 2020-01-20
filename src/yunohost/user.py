@@ -129,6 +129,9 @@ def user_create(operation_logger, username, firstname, lastname, mail, password,
 
     ldap = _get_ldap_interface()
 
+    if username in ["all_users", "visitors"]:
+        raise YunohostError("user_reserved", user=username)
+
     if username in user_list()["users"]:
         raise YunohostError("user_already_exists", user=username)
 
