@@ -1300,8 +1300,8 @@ def app_ssowatconf():
                 unprotected_urls = [u for u in unprotected_urls if u != url]
                 skipped_urls = [u for u in skipped_urls if u != url]
 
-    for domain in domains:
-        skipped_urls.extend([domain + '/yunohost/admin', domain + '/yunohost/api'])
+    for permission in ['yunohost.admin', 'yunohost.api']:
+        all_permissions[permission]['url'] = main_domain + all_permissions[permission]['url']
 
     # Authorize ynh remote diagnosis, ACME challenge and mail autoconfig urls
     skipped_regex.append("^[^/]*/%.well%-known/ynh%-diagnosis/.*$")

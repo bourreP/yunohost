@@ -81,3 +81,21 @@ depends_children:
             - permissionYnh
         groupPermission:
             - "cn=all_users,ou=groups,dc=yunohost,dc=org"
+    cn=yunohost.admin,ou=permission:
+        cn: yunohost.admin
+        gidNumber: "5003"
+        objectClass:
+            - posixGroup
+            - permissionYnh
+        groupPermission:
+            - "cn=all_users,ou=groups,dc=yunohost,dc=org"
+        URL: "/yunohost/admin"
+    cn=yunohost.api,ou=permission:
+        cn: yunohost.api
+        gidNumber: "5004"
+        objectClass:
+            - posixGroup
+            - permissionYnh
+        groupPermission:
+            - "cn=all_users,ou=groups,dc=yunohost,dc=org"
+        URL: "/yunohost/api"
