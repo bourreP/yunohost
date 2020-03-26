@@ -1272,9 +1272,7 @@ def app_ssowatconf():
         redirected_regex.update(app_settings.get('redirected_regex', {}))
 
         # Legacy permission system using (un)protected_uris and _regex managed in app settings...
-        unprotected_urls += [_sanitized_absolute_url(uri) for uri in _get_setting(app_settings, 'unprotected_uris')]
         protected_urls += [_sanitized_absolute_url(uri) for uri in _get_setting(app_settings, 'protected_uris')]
-        unprotected_regex += _get_setting(app_settings, 'unprotected_regex')
         protected_regex += _get_setting(app_settings, 'protected_regex')
 
         # New permission system
@@ -1311,14 +1309,6 @@ def app_ssowatconf():
     skipped_regex.append("^[^/]*/%.well%-known/autoconfig/mail/config%-v1%.1%.xml.*$")
 
 
-    permissions_per_url = {}
-    for perm_name, perm_info in all_permissions.items():
-        # Ignore permissions for which there's no url defined
-        if not perm_info["url"]:
-            continue
-        permissions_per_url[perm_info["url"]] = perm_info['corresponding_users']
-
-
     conf_dict = {
         'portal_domain': main_domain,
         'portal_path': '/yunohost/sso/',
@@ -1330,16 +1320,14 @@ def app_ssowatconf():
         },
         'domains': domains,
         'skipped_urls': skipped_urls,
-        'unprotected_urls': unprotected_urls,
         'protected_urls': protected_urls,
         'skipped_regex': skipped_regex,
-        'unprotected_regex': unprotected_regex,
         'protected_regex': protected_regex,
         'redirected_urls': redirected_urls,
         'redirected_regex': redirected_regex,
         'users': {username: app_map(user=username)
                   for username in user_list()['users'].keys()},
-        'permissions': permissions_per_url,
+        'permissions': all_permissions,
     }
 
     with open('/etc/ssowat/conf.json', 'w+') as f:
